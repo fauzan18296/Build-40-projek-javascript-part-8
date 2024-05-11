@@ -40,7 +40,7 @@ const menu = [{
 },
 ]
 // Algoritma
-// 1. membuat variabel untuk mengambil class section-center sebagai variabel rendering 
+// 1. membuat variabel untuk mengambil class section-center dan container-button sebagai variabel rendering 
 const containerBtn = document.querySelector(".btn-container")
 const sectionCenter = document.querySelector(".section-center")
 console.log(sectionCenter)
