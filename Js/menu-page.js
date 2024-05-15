@@ -47,41 +47,11 @@ console.log(sectionCenter)
 // 2. kita membuat event untuk load semua data menu di halaman web supaya render content nya tidak terlalu lama salah satunya render image
 document.addEventListener("DOMContentLoaded", () => {
   showItems(menu)
-  const categories = menu.reduce((values,item) => {
-    if(!values.includes(item.category)) {
-     values.push(item.category)
-    }
-    return values
-  }, ["all"])
-  console.log(categories)
-  const categoryBtns = categories.map((menuCategory) => {
-    return `<button class="filter-btn" data-id=${menuCategory} type="button">${menuCategory}</button>`
-  }).join("")
-  containerBtn.innerHTML = categoryBtns;
-  
-  // 3. next step adalah memfilterkan itemnya sesuai dengan category
-  const filterBtns = document.querySelectorAll(".filter-btn")
-filterBtns.forEach((btn) => {
-  btn.addEventListener("click", (e) => {
-    let dataCategory = e.target.dataset.id;
-    let filterMenu = menu.filter((menuItem) => {
-      if(menuItem.category === dataCategory) {
-        return menuItem;
-      };
-    })
-    console.log(filterMenu)
-    if(dataCategory === "all") {
-      showItems(menu)
-    } else {
-      showItems(filterMenu)
-    }
-    console.log(dataCategory)
-  })
-})
+  showBtnCategory()
 })
 
 function showItems(menuItems) {
-  // 4. membuat funtion yang bernama showItems dan membuat variabel untuk menampung data menu dan menggunakan method map supaya semua data menu bisa di munculkan di tampilan websitenya
+  // 3. membuat funtion yang bernama showItems dan membuat variabel untuk menampung data menu dan menggunakan method map supaya semua data menu bisa di munculkan di tampilan websitenya
   let items = menuItems.map((item) => {
     return ` <article class="menu-item d-flex justify-content-center align-items-center">
     <img src="${item.image}" class="photo ms-5 rounded" alt=""/>
@@ -99,7 +69,42 @@ function showItems(menuItems) {
   </article>`
   })
   console.log(items.join(""))
-  // 5. lalu kita render dengan menggunakan method innerHTML dan menggunakan method join supaya data menu nya menjadi format document/html.
+  // 4. lalu kita render dengan menggunakan method innerHTML dan menggunakan method join supaya data menu nya menjadi format document/html.
   sectionCenter.innerHTML = items.join("");
+}
+
+// 5. Memunculkan button sesuai dengan nama category dan sesuai dengan isi data category nya
+function showBtnCategory(){
+const categories = menu.reduce((values,item) => {
+  if(!values.includes(item.category)) {
+   values.push(item.category)
+  }
+  return values
+}, ["all"])
+console.log(categories)
+const categoryBtns = categories.map((menuCategory) => {
+  return `<button class="filter-btn" data-id=${menuCategory} type="button">${menuCategory}</button>`
+}).join("")
+containerBtn.innerHTML = categoryBtns;
+
+// 6. next step adalah memfilterkan itemnya sesuai dengan category
+const filterBtns = document.querySelectorAll(".filter-btn")
+filterBtns.forEach((btn) => {
+btn.addEventListener("click", (e) => {
+  let dataCategory = e.target.dataset.id;
+  let filterMenu = menu.filter((menuItem) => {
+    if(menuItem.category === dataCategory) {
+      return menuItem;
+    };
+  })
+  console.log(filterMenu)
+  if(dataCategory === "all") {
+    showItems(menu)
+  } else {
+    showItems(filterMenu)
+  }
+  console.log(dataCategory)
+})
+})
 }
 
