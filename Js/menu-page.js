@@ -73,7 +73,7 @@ function showItems(menuItems) {
   sectionCenter.innerHTML = items.join("");
 }
 
-// 5. Memunculkan button sesuai dengan nama category dan sesuai dengan isi data category nya
+// 5. Memunculkan button sesuai dengan nama category dan sesuai dengan data category nya
 function showBtnCategory(){
 const categories = menu.reduce((values,item) => {
   if(!values.includes(item.category)) {
